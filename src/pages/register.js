@@ -23,13 +23,9 @@ export default function Register() {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      if (response.ok) {
-        setRegisterResponse(data.message);
-        return;
-      }
+      setRegisterResponse(data.message);
     } catch (error) {
       setRegisterResponse(`Error: ${error.message}`);
-      return;
     }
   }
 
@@ -75,6 +71,9 @@ export default function Register() {
         <br />
         <button type="submit">Register</button>
       </form>
+
+      <br />
+
       <div>{registerResponse}</div>
 
       <br />
