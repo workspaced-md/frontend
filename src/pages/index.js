@@ -62,6 +62,7 @@ export default function Home() {
         />
         <button type="submit">Fetch Markdown</button>
       </form>
+
       <div dangerouslySetInnerHTML={{ __html: content }}></div>
     </div>
   );
