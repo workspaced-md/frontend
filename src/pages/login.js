@@ -1,21 +1,21 @@
+// login page should provide a link to sign up page, forgot password page, home page, oauth options, and login fields
 import { useState } from "react";
 
-export default function Register() {
+export default function Login() {
   const URL = process.env.NEXT_PUBLIC_BACKEND_URL;
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [registerResponse, setRegisterResponse] = useState("");
+  const [loginResponse, setLoginResponse] = useState("");
 
   async function handleSubmitUser(event) {
     event.preventDefault();
     const formData = {
       email: email,
-      username: username,
       password: password,
     };
+
     try {
-      const response = await fetch(`${URL}/user/register`, {
+      const response = await fetch(`${URL}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,18 +24,18 @@ export default function Register() {
       });
       const data = await response.json();
       if (response.ok) {
-        setRegisterResponse(data.message);
+        setLoginResponse(data.message);
         return;
       }
     } catch (error) {
-      setRegisterResponse(`Error: ${error.message}`);
+      setLoginResponse(`Error: ${error.message}`);
       return;
     }
   }
 
   return (
     <div>
-      <h1>Sign Up</h1>
+      <h1>Log In</h1>
       <form onSubmit={handleSubmitUser} encType="json">
         <label for="email">Email:</label>
         <br />
@@ -45,18 +45,6 @@ export default function Register() {
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-        <label for="username">Username:</label>
-        <br />
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <br />
@@ -73,13 +61,13 @@ export default function Register() {
         />
         <br />
         <br />
-        <button type="submit">Register</button>
+        <button type="submit">Log In</button>
       </form>
-      <div>{registerResponse}</div>
+      <div>{loginResponse}</div>
 
       <br />
 
-      <a href="/login">Log In</a>
+      <a href="/register">Sign Up</a>
       <br />
       <a href="/forgot-password">Forgot password?</a>
     </div>
