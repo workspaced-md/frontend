@@ -23,7 +23,10 @@ export default function Register() {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      setRegisterResponse(data.message);
+
+      if (response.ok) {
+        setRegisterResponse(data.message);
+      }
     } catch (error) {
       setRegisterResponse(`Error: ${error.message}`);
     }

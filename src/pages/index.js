@@ -29,7 +29,7 @@ export default function Home() {
     event.preventDefault();
     try {
       const response = await fetch(
-        `${URL}/markdown?file=${encodeURIComponent(filename)}`
+        `${URL}/markdown?file=${encodeURIComponent(filename)}`,
       );
       const data = await response.json();
       const sanitizedMarkdown = DOMPurify.sanitize(data.content);
@@ -47,11 +47,11 @@ export default function Home() {
         <input type="text" name="targetDir" defaultValue="/" />
         <button type="submit">Upload</button>
       </form>
-      <div dangerouslySetInnerHTML={{ __html: uploadResponse }}></div>
+      <div>{uploadResponse}</div>
 
       <h1>View</h1>
       <form onSubmit={handleFetchSubmit}>
-        <label for="file">Markdown File Name:</label>
+        <label for="file">Markdown File Name: </label>
         <input
           type="text"
           id="file"
@@ -60,6 +60,8 @@ export default function Home() {
           onChange={(e) => setFilename(e.target.value)}
           required
         />
+        <br />
+        <br />
         <button type="submit">Fetch Markdown</button>
       </form>
 

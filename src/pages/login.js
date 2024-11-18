@@ -1,8 +1,10 @@
 // login page should provide a link to sign up page, forgot password page, home page, oauth options, and login fields
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginResponse, setLoginResponse] = useState("");
@@ -23,13 +25,16 @@ export default function Login() {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
+
       if (response.ok) {
+        const token = data.token;
+        localStorage.setItem("token", token);
+
         setLoginResponse(data.message);
-        return;
+        router.push("/");
       }
     } catch (error) {
       setLoginResponse(`Error: ${error.message}`);
-      return;
     }
   }
 
@@ -63,6 +68,9 @@ export default function Login() {
         <br />
         <button type="submit">Log In</button>
       </form>
+
+      <br />
+
       <div>{loginResponse}</div>
 
       <br />
