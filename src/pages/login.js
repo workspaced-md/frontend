@@ -1,4 +1,3 @@
-// login page should provide a link to sign up page, forgot password page, home page, oauth options, and login fields
 import { useState } from "react";
 import { useRouter } from "next/router";
 
