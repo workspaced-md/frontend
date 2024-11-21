@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DOMPurify from "dompurify";
 import { marked } from "marked";
+import Header from "../components/Header";
 
 export default function Home() {
   const URL = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -41,6 +42,7 @@ export default function Home() {
 
   return (
     <div>
+      <Header />
       <h1>Upload</h1>
       <form onSubmit={handleUploadSubmit} encType="multipart/form-data">
         <input type="file" name="markdownFile" accept=".md" required />
