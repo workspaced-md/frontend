@@ -17,6 +17,7 @@ export default function Header() {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     router.push("/");
+    window.location.reload();
   };
 
   const handleNavigation = (path) => {
