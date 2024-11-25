@@ -50,10 +50,10 @@ export default function Upload() {
       const fileList = await processItems(items);
       setFiles((prevFiles) => [...prevFiles, ...fileList]);
     } else {
-      // Handle click-to-select
+      // Handle click-to-select (files only)
       const fileList = acceptedFiles.map((file) => ({
         file,
-        path: file.webkitRelativePath || file.name, // Use relative path for folders
+        path: file.name, // No folder structure for individual files
       }));
       setFiles((prevFiles) => [...prevFiles, ...fileList]);
     }
@@ -89,7 +89,7 @@ export default function Upload() {
 
   // Render file tree
   const renderFileTree = (tree, level = 0) => (
-    <ul style={{ marginLeft: level * 20 + "px" }}>
+    <ul>
       {Object.entries(tree).map(([name, subtree]) => (
         <li key={name}>
           {subtree === null ? (
@@ -106,32 +106,38 @@ export default function Upload() {
   );
 
   return (
-    <div>
-      <h2>Upload Files or Folders</h2>
+    <div style={{ margin: "0 1rem" }}>
+      <h2>Upload</h2>
       <div
-        {...getRootProps({
-          style: {
-            border: "2px dashed #ccc",
-            padding: "20px",
-            textAlign: "center",
-            cursor: "pointer",
-          },
-        })}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        {/* Add webkitdirectory for folder selection */}
-        <input {...getInputProps()} webkitdirectory="true" directory="true" />
-        {isDragActive ? (
-          <p>Drop files or folders here...</p>
-        ) : (
-          <p>Drag 'n' drop files or folders here, or click to select files</p>
-        )}
+        <div
+          {...getRootProps({
+            style: {
+              border: "2px dashed #ccc",
+              padding: "20px",
+              textAlign: "center",
+              cursor: "pointer",
+              width: "50%",
+            },
+          })}
+        >
+          <input type="file" multiple {...getInputProps()} />
+          {isDragActive ? (
+            <p>Drop files or folders here ...</p>
+          ) : (
+            <p>Drop files/folders here, or click to select files</p>
+          )}
+        </div>
       </div>
 
       {files.length > 0 && (
-        <div style={{ marginTop: "20px" }}>
-          <h4>Folder Structure:</h4>
-          {renderFileTree(fileTree)}
-        </div>
+        <div style={{ marginTop: "20px" }}>{renderFileTree(fileTree)}</div>
       )}
 
       {uploadResponse && (
