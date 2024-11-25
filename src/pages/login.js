@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Header from "../components/Header";
 
 export default function Login() {
   const URL = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -38,45 +39,48 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmitUser} encType="json">
-        <label for="email">Email:</label>
-        <br />
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-        <label for="password">Password:</label>
-        <br />
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-        <button type="submit">Log In</button>
-      </form>
+    <>
+      <Header />
+      <div style={{ margin: "1rem" }}>
+        <h2>Log In</h2>
+        <form onSubmit={handleSubmitUser} encType="json">
+          <label for="email">Email:</label>
+          <br />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <br />
+          <br />
+          <label for="password">Password:</label>
+          <br />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <br />
+          <br />
+          <button type="submit">Log In</button>
+        </form>
 
-      <br />
+        <br />
 
-      <div>{loginResponse}</div>
+        <div>{loginResponse}</div>
 
-      <br />
+        <br />
 
-      <a href="/register">Sign Up</a>
-      <br />
-      <a href="/forgot-password">Forgot password?</a>
-    </div>
+        <a href="/register">Sign up</a>
+        <br />
+        <a href="/forgot-password">Forgot password?</a>
+      </div>
+    </>
   );
 }

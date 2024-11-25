@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Header from "../components/Header";
 
 export default function Register() {
   const URL = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -33,57 +34,60 @@ export default function Register() {
   }
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmitUser} encType="json">
-        <label for="email">Email:</label>
-        <br />
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-        <label for="username">Username:</label>
-        <br />
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-        <label for="password">Password:</label>
-        <br />
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-        <button type="submit">Register</button>
-      </form>
+    <>
+      <Header />
+      <div style={{ margin: 0 + "1rem" }}>
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSubmitUser} encType="json">
+          <label for="email">Email:</label>
+          <br />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <br />
+          <br />
+          <label for="username">Username:</label>
+          <br />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <br />
+          <br />
+          <label for="password">Password:</label>
+          <br />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <br />
+          <br />
+          <button type="submit">Register</button>
+        </form>
 
-      <br />
+        <br />
 
-      <div>{registerResponse}</div>
+        <div>{registerResponse}</div>
 
-      <br />
+        <br />
 
-      <a href="/login">Log In</a>
-      <br />
-      <a href="/forgot-password">Forgot password?</a>
-    </div>
+        <a href="/login">Log in</a>
+        <br />
+        <a href="/forgot-password">Forgot password?</a>
+      </div>
+    </>
   );
 }

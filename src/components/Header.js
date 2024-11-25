@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import styles from "../styles/Header.module.css";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,28 +19,28 @@ export default function Header() {
     router.push("/");
   };
 
+  const handleNavigation = (path) => {
+    router.push(path);
+  };
+
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          {isLoggedIn ? (
-            <li>
-              <button onClick={handleLogout}>Logout</button>
-            </li>
-          ) : (
-            <>
-              <li>
-                <Link href="/login">Login</Link>
-              </li>
-              <li>
-                <Link href="/register">Register</Link>
-              </li>
-            </>
-          )}
-        </ul>
+    <header className={styles.header}>
+      <h2>
+        <Link className={styles.link} href="/">
+          workspaced.org
+        </Link>
+      </h2>
+      <nav className={styles.navList}>
+        {isLoggedIn ? (
+          <button onClick={handleLogout}>Log out</button>
+        ) : (
+          <>
+            <button onClick={() => handleNavigation("/login")}>Log in</button>
+            <button onClick={() => handleNavigation("/register")}>
+              Sign up
+            </button>
+          </>
+        )}
       </nav>
     </header>
   );
